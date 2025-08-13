@@ -1,0 +1,2 @@
+class InvalidDiceValueError(Exception):
+    pass

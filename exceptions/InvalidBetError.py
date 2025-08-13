@@ -1,0 +1,2 @@
+class InvalidBetError(Exception):
+    pass
