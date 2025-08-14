@@ -1,17 +1,44 @@
-# LiarsDice
-Implementation of the Liar`s Dice game in Python
+# Liar's Dice
+
+A Python implementation of the classic dice game **Liar's Dice** for multiple players.
+
+## Game Overview
+
+Liar's Dice is a bluffing game where players roll dice in secret and try to outguess or challenge each other's bids. The game continues over multiple rounds until only one player remains.
+
 ## Rules
--Each player has five standard 6-sided dice.The game is played over multiple rounds.
 
--To begin each round, all players roll their dice simultaneously. Each player looks at their own dice after they roll, keeping them hidden from the other players. 
+1. **Setup**
+   - Each player has **five standard 6-sided dice**.
+   - All players roll their dice simultaneously at the start of each round, keeping their rolls hidden.
 
--1 is wild, which means it counts as any dice face. E.g., if you have three 1s and two 5s, you can say you have five 5s.
+2. **Wild Dice**
+   - **1 is wild**: it counts as any dice face.
+   - Example: If you roll three 1s and two 5s, you can claim **five 5s**.
 
--Every player then states a bid consisting of a face ("1's", "5's", etc.) and a quantity. The quantity represents the player's guess as to how many of each face have been rolled by all the players at the table, including themselves.
+3. **Bidding**
+   - Each player states a **bid**: a quantity and a face value.
+   - The quantity represents the total number of that face among all players’ dice.
+   - The **first bet** is always `0 dices of 1`.
 
--The first bet is 0 dices of 1 .(because it has 100% probability)
+4. **Player Actions**
+   - On their turn, a player can:
+     1. **Raise the bid** – increase the quantity or choose a higher face value at the same quantity.
+     2. **Challenge** the previous bid.
 
--The player who is on turn has 2 options: raise the bet, or challenge the previous one. Raising the bid means that the player may bid a higher quantity of any face value, or the same quantity of a higher face. If the current player challenges the previous bid, all dice are revealed. If the bid is valid (there are at least as many of the face value as were bid), the bidder wins. Otherwise, the challenger wins. The player who loses a round loses one of their dice. The last player to still retain a die is the winner. The loser of the last round starts the bidding on the next round. If the loser of the last round was eliminated, the next player starts the new round.
+5. **Resolution**
+   - If a bid is challenged, all dice are revealed:
+     - If the bid is valid (enough dice match the face value, including wilds), the **bidder wins**.
+     - Otherwise, the **challenger wins**.
+   - The **loser** of the round loses one die.
 
-### IDE:PyCharm
-### Version:Python 3.13.2
+6. **Winning the Game**
+   - The game continues until only one player has dice remaining. That player is the **winner**.
+   - The loser of a round starts the next round’s bidding, unless they are eliminated. In that case, the next available player begins.
+
+## Installation
+
+1. Make sure **Python 3.13.2** is installed.
+2. Clone the repository:
+   ```bash
+   git clone <repository_url>
