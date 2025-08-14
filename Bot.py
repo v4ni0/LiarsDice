@@ -30,7 +30,7 @@ class Bot(Player):
         if own_dices_count >= quantity:
             return False
         probability = self.binomial_probability(quantity - own_dices_count, total_dices - self.get_number_of_dices(), p)
-        if probability >= 1/3:
+        if probability >= 1 / 3:
             return False
         return True
 

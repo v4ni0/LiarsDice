@@ -76,5 +76,6 @@ class TestBot(unittest.TestCase):
         new_bet = self.bot.place_bet_bot(current_bet, total_dices)
         self.assertEqual(new_bet, (6, 2))
 
+
 if __name__ == "__main__":
     unittest.main()

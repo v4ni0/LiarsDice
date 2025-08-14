@@ -53,7 +53,12 @@ class Game:
 
         self.current_bet = (0, 1)
 
-
+    # Reveals all dices on table in case of a challenge
+    def reveal_dices(self):
+        print("\nRevealing all dices on the table:")
+        for player in self.players:
+            print(f"Player {player.name} has dices: {player.get_values()}")
+        print("Values on table:", self.values_on_table)
 
     # Challenges the current bet by checking if the bet is valid
     # returns the index of the loser if not eliminated, otherwise next player index
@@ -62,11 +67,12 @@ class Game:
         quantity, face_value = self.current_bet
         actual_count = self.values_on_table[face_value]
         eliminated_player = None
+        self.reveal_dices()
         if quantity > actual_count:
 
             previous_player_index = (self.current_player_index - 1 + self.number_of_players) % self.number_of_players
             print(
-                f"Successful challenge! The bet was too high. Player {self.players[previous_player_index].name} loses a die.")
+                f"Successful challenge! The bet was too high. Player {self.players[previous_player_index].name} loses a dice.")
             self.players[previous_player_index].lose_die()
 
             if self.players[previous_player_index].get_number_of_dices() == 0:
@@ -76,7 +82,7 @@ class Game:
             next_player_index = previous_player_index % self.number_of_players
 
         else:
-            print(f"Unsuccessful challenge. Player {self.players[self.current_player_index].name} loses a die.")
+            print(f"Unsuccessful challenge. Player {self.players[self.current_player_index].name} loses a dice.")
             self.players[self.current_player_index].lose_die()
             if self.players[self.current_player_index].get_number_of_dices() == 0:
                 print(f"Player {self.players[self.current_player_index].name} is eliminated.")
@@ -93,7 +99,6 @@ class Game:
                 else:
                     self.values_on_table[face_value] -= 1
         return next_player_index
-
 
     # Checks if there is a winner (only one player left)
     # In this case, the game ends
@@ -116,9 +121,11 @@ class Game:
         print("1. Place a bet")
         print("2. Challenge the current bet")
         print("3. Exit")
+        print(
+            "4. Leave the game and spectate")  # If you do not want to play anymore, but want to watch the left bots play
         choice = input("Enter your choice: ")
-        if choice not in ['1', '2', '3']:
-            raise InvalidCommandError("Invalid choice, please enter 1, 2 or 3.")
+        if choice not in ['1', '2', '3', '4']:
+            raise InvalidCommandError("Invalid choice, please enter 1, 2, 3 or 4.")
         if choice == '3':
             print("Exiting the game.")
             exit(0)
@@ -165,9 +172,18 @@ class Game:
                     elif choice == '2':
                         print("You decided to challenge the current bet.")
                         self.current_player_index = self.challenge_bet()
-                        if isinstance(self.players[0],Bot):
+                        if isinstance(self.players[0], Bot):
                             print("You are eliminated from the game.")
                             is_eliminated = True
+                        break
+                    else:
+                        print("You chose to leave the game and spectate.")
+                        for _ in range(self.players[0].get_number_of_dices()):
+                            self.players[0].lose_die()
+                            self.total_dices -= 1
+                        is_eliminated = True
+                        self.players.pop(0)
+                        self.number_of_players -= 1
                         break
 
 
@@ -179,7 +195,7 @@ class Game:
                     if will_challenge:
                         print(f"Bot {self.players[self.current_player_index].name} challenges the bet.")
                         self.current_player_index = self.challenge_bet()
-                        if not is_eliminated and isinstance(Bot):
+                        if not is_eliminated and isinstance(self.players[0], Bot):
                             print("You are eliminated from the game.")
                             is_eliminated = True
                         break
