@@ -36,9 +36,8 @@ Liar's Dice is a bluffing game where players roll dice in secret and try to outg
    - The game continues until only one player has dice remaining. That player is the **winner**.
    - The loser of a round starts the next round’s bidding, unless they are eliminated. In that case, the next available player begins.
 
-## Installation
+## Software
 
-1. Make sure **Python 3.13.2** is installed.
-2. Clone the repository:
-   ```bash
-   git clone <repository_url>
+1. **Python 3.13.2**.
+2. IDE-PyCharm
+   
