@@ -12,7 +12,7 @@ Liar's Dice is a bluffing game where players roll dice in secret and try to outg
    - Each player has **five standard 6-sided dice**.
    - All players roll their dice simultaneously at the start of each round, keeping their rolls hidden.
 
-2. **Wild Dice**
+2. **Wild Dice Mode**
    - **1 is wild**: it counts as any dice face.
    - Example: If you roll three 1s and two 5s, you can claim **five 5s**.
 
